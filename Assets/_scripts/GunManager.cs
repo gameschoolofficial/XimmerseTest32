@@ -5,6 +5,16 @@ using Ximmerse.CrossInput;
 public class GunManager : MonoBehaviour {
 
 	public Rigidbody bulletPrefab;
+
+	//public Transform rightHandMesh;
+	//public Transform leftHandMesh;
+	private VirtualPose leftGun_pose; 
+	private VirtualPose rightGun_pose; 
+
+
+	public Transform rightGunLocation;
+	public Transform leftGunLocation;
+
 	public Transform rightGunTip;
 	public Transform leftGunTip;
 
@@ -27,6 +37,8 @@ public class GunManager : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 	
+
+		// Release trigger to fire another bullet
 		if (CrossInputManager.GetButtonUp ("Left_Trigger")) {
 		
 			releaseLeftTrigger = true;
@@ -36,23 +48,61 @@ public class GunManager : MonoBehaviour {
 			releaseRightTrigger = true;
 		}
 
-		if (CrossInputManager.GetButtonDown ("Left_Trigger") && releaseLeftTrigger){
+		// Setting position for the guns
+		leftGun_pose = CrossInputManager.VirtualPoseReference ("Left_Hand");
+		leftGunLocation.rotation = leftGun_pose.rotation;
+		leftGunLocation.position = leftGun_pose.position;
 
-			if(leftGunAmmo > 0){
+		rightGun_pose = CrossInputManager.VirtualPoseReference ("Right_Hand");
+		rightGunLocation.rotation = rightGun_pose.rotation;
+		rightGunLocation.position = rightGun_pose.position;
+		
+		//print ("leftGun_pose is "+leftGun_pose.position);
+		//print ("Left Hand Position " + leftGun_pose.position );
+
+
+		// Setting up Reload functionality
+		//controllers are never set to inactive, and are placed our of range.  
+		// so using this as a location, we set that space as reload space. 
+		if (leftGun_pose.position.y < -500) {
+		
+			if (CrossInputManager.GetButtonDown ("Left_Trigger") && releaseLeftTrigger) {
+				reload (0);
+			}
+		}
+
+		if (rightGun_pose.position.y < -500) {
+			if (CrossInputManager.GetButtonDown ("Right_Trigger") && releaseLeftTrigger) {				
+				reload (1);
+			}
+		}
+
+		//
+
+
+		//Shoot weapons
+
+		if (CrossInputManager.GetButtonDown ("Left_Trigger") && releaseLeftTrigger) {
+			if (leftGunAmmo > 0) {
 				shoot (leftGunTip);
 				leftGunAmmo--;
 				releaseLeftTrigger = false;
 			} else {
-				print ("Reload!!!");
+				print ("Reload Left !!!");
 			}
 		}
 
-		if (CrossInputManager.GetButtonDown ("Right_Trigger") && releaseRightTrigger){
-			
-			shoot (rightGunTip);
-			rightGunAmmo--;
-			releaseRightTrigger = false;
+		if (CrossInputManager.GetButtonDown ("Right_Trigger") && releaseRightTrigger) {
+
+			if (rightGunAmmo > 0) {
+				shoot (rightGunTip);
+				rightGunAmmo--;
+				releaseRightTrigger = false;
+			} else {
+				print ("Reload Right!!!");
+			}
 		}
+
 
 	}
 
@@ -70,10 +120,12 @@ public class GunManager : MonoBehaviour {
 		if (gunHand == 0) {
 		
 			leftGunAmmo = totalAmmo;
+			print ("Left Gun Reloaded");
 		}
 		if (gunHand == 1) {
 			
 			rightGunAmmo = totalAmmo;
+			print ("Right Gun Reloaded");
 		}
 	}
 }
