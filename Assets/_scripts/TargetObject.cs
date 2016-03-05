@@ -1,24 +1,38 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class target : MonoBehaviour {
+public class TargetObject : MonoBehaviour {
 
 	public GameObject explosionPrefab;
 
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
 	// Update is called once per frame
 	void Update () {
 	
 	}
 
-	void onCollisionEnter(Collision collision){
+	void onCollisionEnter(Collision col){
 
+		if (col.gameObject.tag == "Bullet") {
+		
+			print ("Bullet hit this object");
+		}
+		print ("onCollisionEnter Hit");
 		Instantiate (explosionPrefab, transform.position, transform.rotation);
-		print ("Target Hit");
+
 		//Destroy (gameObject);
 	}
+
+	void onTriggerEnter(Collision col){
+		
+		if (col.gameObject.tag == "Bullet") {
+			
+			print ("Bullet hit this object");
+		}
+		print ("onTriggerEnter Hit");
+		Instantiate (explosionPrefab, transform.position, transform.rotation);
+		
+		//Destroy (gameObject);
+	}
+
+
 }

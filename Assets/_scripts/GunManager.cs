@@ -56,15 +56,16 @@ public class GunManager : MonoBehaviour {
 		rightGun_pose = CrossInputManager.VirtualPoseReference ("Right_Hand");
 		rightGunLocation.rotation = rightGun_pose.rotation;
 		rightGunLocation.position = rightGun_pose.position;
-		
+
+
 		//print ("leftGun_pose is "+leftGun_pose.position);
-		//print ("Left Hand Position " + leftGun_pose.position );
+		//print ("RightGun_pose is " + rightGun_pose.position );
 
 
 		// Setting up Reload functionality
 		//controllers are never set to inactive, and are placed our of range.  
 		// so using this as a location, we set that space as reload space. 
-		if (leftGun_pose.position.y < -500) {
+		if (leftGun_pose.position.y < -500)  {
 		
 			if (CrossInputManager.GetButtonDown ("Left_Trigger") && releaseLeftTrigger) {
 				reload (0);
@@ -89,6 +90,7 @@ public class GunManager : MonoBehaviour {
 				releaseLeftTrigger = false;
 			} else {
 				print ("Reload Left !!!");
+				//add Reload messaging
 			}
 		}
 
@@ -100,6 +102,7 @@ public class GunManager : MonoBehaviour {
 				releaseRightTrigger = false;
 			} else {
 				print ("Reload Right!!!");
+				//
 			}
 		}
 
