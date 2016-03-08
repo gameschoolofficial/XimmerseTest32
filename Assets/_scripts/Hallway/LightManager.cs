@@ -66,12 +66,13 @@ public class LightManager : MonoBehaviour {
 
 			lite.intensity = lowIntensity;
 		}
-		GhoulSpawner.spawnGhouls ();
+
 		yield return new WaitForSeconds (.5f);
 
 		foreach (Light lite in Lights) {
 			lite.intensity = 1;
 		}
+		GhoulSpawner.spawnGhouls ();
 		yield return new WaitForSeconds (.5f);
 
 
