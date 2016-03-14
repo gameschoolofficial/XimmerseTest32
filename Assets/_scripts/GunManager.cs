@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
-using Ximmerse.CrossInput;
+//using Ximmerse.CrossInput;
 
 public class GunManager : MonoBehaviour {
 
@@ -8,8 +8,10 @@ public class GunManager : MonoBehaviour {
 
 	//public Transform rightHandMesh;
 	//public Transform leftHandMesh;
-	private VirtualPose leftGun_pose; 
-	private VirtualPose rightGun_pose; 
+
+	//turn on before sending to Charlie
+	//private VirtualPose leftGun_pose; 
+	//private VirtualPose rightGun_pose; 
 
 
 	public Transform rightGunLocation;
@@ -37,6 +39,7 @@ public class GunManager : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 	
+		/*
 
 		// Release trigger to fire another bullet
 		if (CrossInputManager.GetButtonUp ("Left_Trigger")) {
@@ -79,11 +82,28 @@ public class GunManager : MonoBehaviour {
 		}
 
 		//
+		*/
+
+		//reload for non-XImmerse
+
+
+
+		if (Input.GetKeyUp(KeyCode.D)) {
+				reload (0);
+			}
+
+
+
+		if (Input.GetKeyUp(KeyCode.K)) {	
+				reload (1);
+			}
+
 
 
 		//Shoot weapons
 
-		if (CrossInputManager.GetButtonDown ("Left_Trigger") && releaseLeftTrigger) {
+		//if (CrossInputManager.GetButtonDown ("Left_Trigger") && releaseLeftTrigger) {
+		if (Input.GetKeyUp(KeyCode.F)) {	
 			if (leftGunAmmo > 0) {
 				shoot (leftGunTip);
 				leftGunAmmo--;
@@ -94,8 +114,8 @@ public class GunManager : MonoBehaviour {
 			}
 		}
 
-		if (CrossInputManager.GetButtonDown ("Right_Trigger") && releaseRightTrigger) {
-
+//		if (CrossInputManager.GetButtonDown ("Right_Trigger") && releaseRightTrigger) {
+		if (Input.GetKeyUp(KeyCode.J)) {	
 			if (rightGunAmmo > 0) {
 				shoot (rightGunTip);
 				rightGunAmmo--;
@@ -105,6 +125,11 @@ public class GunManager : MonoBehaviour {
 				//
 			}
 		}
+
+
+
+
+
 
 
 	}

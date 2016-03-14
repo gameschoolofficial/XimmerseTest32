@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
-using Ximmerse.CrossInput;
+//using Ximmerse.CrossInput;
 
 public class InputTest : MonoBehaviour {
 
@@ -15,10 +15,10 @@ public class InputTest : MonoBehaviour {
 		//printTriggerInput ();  
 	
 	}
-
+	/*
 	void printTriggerInput()
 	{
 		print("Left Trigger is " + CrossInputManager.GetButton ("Left_Trigger"));
 		print("Right Trigger is " + CrossInputManager.GetButton ("Right_Trigger"));
-	}
+	}*/
 }
