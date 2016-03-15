@@ -12,7 +12,30 @@ public class Ghoul : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+
+		if(Input.GetKey(KeyCode.Q))
+		{
+			die();
+		}
 	
+	}
+
+	void OnCollisionEnter(Collision col)
+	{
+
+		if(col.collider.tag == "bullet")
+		{
+			die();
+		}
+
+
+	}
+
+	void die()
+	{
+		GameObject deathPoof = Instantiate(DeathPoof);
+		deathPoof.transform.position = transform.position;
+		Destroy(this.gameObject);
 	}
 
 

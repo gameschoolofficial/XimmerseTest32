@@ -14,6 +14,7 @@ namespace Ximmerse.CrossInput{
 		/// 
 		/// </summary>
 		public static void RegisterVirtualPose(VirtualPose pose) {
+			print ("registering pose: " + pose);
 			activeInput.RegisterVirtualPose(pose);
 		}
 		
