@@ -77,7 +77,7 @@ namespace Ximmerse.CrossInput{
 			this.name=name;
 			matchWithInputManager=matchToInputSettings;
 			//
-			position=Vector3.one*-1024f;
+			//position=Vector3.one*-1024f;
 			rotation=Quaternion.identity;
 		}
 

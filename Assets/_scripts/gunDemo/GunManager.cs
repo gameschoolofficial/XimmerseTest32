@@ -24,6 +24,9 @@ public class GunManager : MonoBehaviour {
 	private bool releaseLeftTrigger = true;
 	private bool releaseRightTrigger = true;
 
+	public bool showPosition;
+	public bool showMissing;
+
 	// Use this for initialization
 	void Start () {
 
@@ -53,9 +56,18 @@ public class GunManager : MonoBehaviour {
 		rightGunLocation.rotation = rightGun_pose.rotation;
 		rightGunLocation.position = rightGun_pose.position;
 
-		print ("left position: " + leftGun_pose.rotation);
-		print ("right position: " + rightGun_pose.rotation);
+		if (showPosition) {
+			print ("left position: " + leftGun_pose.rotation);
+			print ("right position: " + rightGun_pose.rotation);
+		}
 
+		if (showMissing) {
+
+			if (leftGun_pose.trackingResult == TrackingResult.Miss)
+				print ("Left Gun Missing");
+			if (rightGun_pose.trackingResult == TrackingResult.Miss)
+				print ("Right Gun Missing");
+		}
 
 		// Setting up Reload functionality
 		//controllers are never set to inactive, and are placed our of range.  
@@ -75,7 +87,7 @@ public class GunManager : MonoBehaviour {
 
 		//Shoot weapons
 		if (CrossInputManager.GetButtonDown ("Left_Trigger") && releaseLeftTrigger) {
-			print ("trigger!");
+			//print ("trigger!");
 			if (leftGunAmmo > 0) {
 				shoot (leftGunTip);
 				leftGunAmmo--;
@@ -87,7 +99,7 @@ public class GunManager : MonoBehaviour {
 		}
 
 		if (CrossInputManager.GetButtonDown ("Right_Trigger") && releaseRightTrigger) {
-			print ("trigger!");
+			//print ("trigger!");
 			if (rightGunAmmo > 0) {
 				shoot (rightGunTip);
 				rightGunAmmo--;
@@ -119,4 +131,5 @@ public class GunManager : MonoBehaviour {
 			rightGunAmmo = totalAmmo;
 		}
 	}
+
 }
