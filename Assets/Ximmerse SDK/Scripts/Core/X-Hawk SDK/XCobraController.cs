@@ -138,7 +138,7 @@ namespace Ximmerse.Core {
 			}
 			if((m_State&XCobraState.POSITION_FOUND)==0 &&// Hide?
 				m_XHawkInput.autoHideXCobra) {
-				m_Position.Set(-1024f,-1024f,-1024f);
+				//m_Position.Set(-1024f,-1024f,-1024f);
 			}else {
 				m_Position.Scale(m_XHawkInput.sensitivity);
 			}
