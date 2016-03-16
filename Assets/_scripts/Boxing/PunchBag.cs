@@ -10,6 +10,8 @@ public class PunchBag : MonoBehaviour {
 	public Material Red;
 	public Material Neutral;
 	public Text myScoreText;
+	public AudioSource hitSound;
+	public AudioSource bellSound;
 
 	// Use this for initialization
 	void Start () {
@@ -20,7 +22,6 @@ public class PunchBag : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		
-		
 	
 	}
 
@@ -29,6 +30,7 @@ public class PunchBag : MonoBehaviour {
 		print ("collision");
 		if (selected) {
 			hits++;
+			playPunch ();
 			updateMyScoreMeter ();
 		}
 	}
@@ -38,6 +40,7 @@ public class PunchBag : MonoBehaviour {
 		selected = true; 
 		//color = red;
 		GetComponent<Renderer>().material = Red;
+		playBell ();
 	}
 
 	public void exitSelected()
@@ -50,5 +53,15 @@ public class PunchBag : MonoBehaviour {
 	private void updateMyScoreMeter()
 	{
 		myScoreText.text = "Hits: " + hits;
+	}
+
+	private void playPunch()
+	{
+		hitSound.time = .17f;
+		hitSound.Play ();
+	}
+	public void playBell()
+	{
+		bellSound.Play ();
 	}
 }

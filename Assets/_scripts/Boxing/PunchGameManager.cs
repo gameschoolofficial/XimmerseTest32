@@ -16,7 +16,7 @@ public class PunchGameManager : MonoBehaviour {
 	
 	}
 
-	void Start()
+	public void StartBoxing()
 	{
 		StartCoroutine (switchSelectedPunchingBag (0));
 	}
@@ -34,11 +34,11 @@ public class PunchGameManager : MonoBehaviour {
 	IEnumerator switchSelectedPunchingBag(int lastBag)
 	{
 		int waitTime = 10;
-		int nextBag = Random.Range (0, PunchingBags.Length - 1);
+		int nextBag = Random.Range (1, PunchingBags.Length - 1);
 
 		if (firstTime) {
 			PunchingBags [0].enterSelected ();
-			waitTime = 20;
+			waitTime = 10;
 			firstTime = false;
 		} else {
 
