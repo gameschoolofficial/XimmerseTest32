@@ -41,17 +41,25 @@ public class PunchGameManager : MonoBehaviour {
 		totalHits += additionalHit;
 	}
 
+	private bool secondTime = false;
+
 	IEnumerator switchSelectedPunchingBag(int lastBag)
 	{
 		int waitTime = 10;
 		int nextBag = Random.Range (1, PunchingBags.Length - 1);
+		if (nextBag == lastBag)
+			nextBag = 0;
 
 		if (firstTime) {
 			PunchingBags [0].enterSelected ();
 			waitTime = 10;
 			firstTime = false;
+			secondTime = true;
 		} else {
-
+			if (secondTime) {
+				PunchingBags [0].exitSelected ();
+				secondTime = false;
+			}
 			PunchingBags [lastBag].exitSelected ();
 			PunchingBags [nextBag].enterSelected ();
 			waitTime = bagSelectPeriod;
