@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using Ximmerse.CrossInput;
 
 public class PunchGameManager : MonoBehaviour {
 
@@ -8,6 +9,9 @@ public class PunchGameManager : MonoBehaviour {
 	[HideInInspector]public static PunchGameManager main;
 	private bool firstTime = true;
 	public int bagSelectPeriod;
+	public GameObject Podium;
+
+	private bool startedBoxing = false;
 
 	// Use this for initialization
 	void Awake () {
@@ -18,11 +22,17 @@ public class PunchGameManager : MonoBehaviour {
 
 	public void StartBoxing()
 	{
+		startedBoxing = true;
+		Podium.gameObject.SetActive (false);
 		StartCoroutine (switchSelectedPunchingBag (0));
 	}
 	
 	// Update is called once per frame
 	void Update () {
+		 
+
+		if (!startedBoxing && CrossInputManager.GetAxis ("Left_Trigger") > .8f && CrossInputManager.GetAxis ("Right_Trigger") > .8f)
+			StartBoxing ();
 	
 	}
 
