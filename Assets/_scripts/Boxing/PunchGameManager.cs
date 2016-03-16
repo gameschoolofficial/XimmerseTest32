@@ -33,6 +33,8 @@ public class PunchGameManager : MonoBehaviour {
 
 		if (!startedBoxing && CrossInputManager.GetAxis ("Left_Trigger") > .8f && CrossInputManager.GetAxis ("Right_Trigger") > .8f)
 			StartBoxing ();
+		if (Input.GetKeyUp (KeyCode.T))
+			StartBoxing ();
 	
 	}
 
@@ -41,31 +43,30 @@ public class PunchGameManager : MonoBehaviour {
 		totalHits += additionalHit;
 	}
 
-	private bool secondTime = false;
+
 
 	IEnumerator switchSelectedPunchingBag(int lastBag)
 	{
 		int waitTime = 10;
-		int nextBag = Random.Range (1, PunchingBags.Length - 1);
-		if (nextBag == lastBag)
+		int nextBag = lastBag + 1;//Random.Range (1, PunchingBags.Length - 1);
+		if (nextBag > PunchingBags.Length - 1)
 			nextBag = 0;
 
 		if (firstTime) {
 			PunchingBags [0].enterSelected ();
 			waitTime = 10;
 			firstTime = false;
-			secondTime = true;
+			lastBag = 0;
 		} else {
-			if (secondTime) {
-				PunchingBags [0].exitSelected ();
-				secondTime = false;
-			}
-			PunchingBags [lastBag].exitSelected ();
+			
+		
 			PunchingBags [nextBag].enterSelected ();
 			waitTime = bagSelectPeriod;
 		}
 
 		yield return new WaitForSeconds (bagSelectPeriod);
+
+		PunchingBags [lastBag].exitSelected ();
 		StartCoroutine (switchSelectedPunchingBag (nextBag));
 	}
 }
