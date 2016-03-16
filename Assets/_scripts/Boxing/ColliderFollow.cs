@@ -13,7 +13,7 @@ public class ColliderFollow : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-		m_BoxCollider.center = transform.position;
-	
+		//m_BoxCollider.center = transform.position;
+		m_BoxCollider.gameObject.transform.position = transform.position;
 	}
 }
