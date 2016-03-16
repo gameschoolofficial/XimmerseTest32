@@ -1,21 +1,25 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class PunchBag : MonoBehaviour {
 	public bool selected;
 	public int pointsGained;
-	public int hits;
+	public int hits = 0;
 
 	public Material Red;
 	public Material Neutral;
+	public Text myScoreText;
 
 	// Use this for initialization
 	void Start () {
-		enterSelected ();
+		updateMyScoreMeter ();
+		
 	}
 	
 	// Update is called once per frame
 	void Update () {
+		
 		
 	
 	}
@@ -24,22 +28,27 @@ public class PunchBag : MonoBehaviour {
 	{
 		print ("collision");
 		if (selected) {
-			pointsGained += 100;
 			hits++;
+			updateMyScoreMeter ();
 		}
 	}
 
-	void enterSelected()
+	public void enterSelected()
 	{
 		selected = true; 
 		//color = red;
 		GetComponent<Renderer>().material = Red;
 	}
 
-	void exitSelected()
+	public void exitSelected()
 	{
 		selected = false;
 		//color = none;
 		GetComponent<Renderer>().material = Neutral;
+	}
+
+	private void updateMyScoreMeter()
+	{
+		myScoreText.text = "Hits: " + hits;
 	}
 }
