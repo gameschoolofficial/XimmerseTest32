@@ -33,7 +33,9 @@ public class PunchGameManager : MonoBehaviour {
 
 		if (!startedBoxing && CrossInputManager.GetAxis ("Left_Trigger") > .8f && CrossInputManager.GetAxis ("Right_Trigger") > .8f)
 			StartBoxing ();
-		if (CrossInputManager.GetButtonUp ("Left_Start"))
+		if (CrossInputManager.GetButtonUp ("Right_Two") || CrossInputManager.GetButtonUp ("Left_Two"))
+			StartBoxing ();
+		if (CrossInputManager.GetButtonUp ("Left_One") || CrossInputManager.GetButtonUp("Right_One"))
 			Application.LoadLevel (Application.loadedLevel);
 	
 	}
